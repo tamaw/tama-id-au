@@ -1,0 +1,17 @@
+name: tama-id-au
+
+default-extensions:
+  - OverloadedStrings
+  - ExtendedDefaultRules
+
+ghc-options:
+  - -Wall
+
+dependencies:
+  - base
+  - containers
+  - lucid
+
+executable:
+  main: Main.hs
+  source-dirs: src
