@@ -72,6 +72,8 @@ headHtml _m = do
     meta_ [name_ "viewport", content_ "width=device-width, initial-scale=1"]
     meta_ [name_ "description", content_ "replace me" ]
     style_ [type_ "text/css"] $ Clay.render styleSheet
+    -- workaround: no fill element
+    style_ [type_ "text/css"] ("svg:hover { fill: var(--hover-color); }" :: Text)
 
 landingHtml :: Model -> Html ()
 landingHtml m = do
@@ -84,8 +86,6 @@ landingHtml m = do
   where
     createSocialMediaLink :: (Uri, Svg) -> Html ()
     createSocialMediaLink (uri, svg) =
-     div_ [class_ "flex-col", id_ "landing-socialmedia-item"] $
+     div_ [class_ "flex flex-col", id_ "landing-socialmedia-item", style_ "--hover-color: orangered"] $
       a_ [href_ uri] svg
-
-
 

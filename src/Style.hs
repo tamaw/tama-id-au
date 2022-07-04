@@ -47,10 +47,25 @@ styleSheet = do
         backgroundColor red
     "#landing-socialmedia" ? do
         flexFlow row F.wrap
+        border solid (px 1) auto
+        borderColor black
+        backgroundColor orangered
     "#landing-socialmedia-item" ? do
-        padding (px 4) (px 4) (px 4) (px 4)
-        width (px 40)
-        margin (em 0.5) (em 0)(em 0)(em 0)
-        backgroundColor grey
-        boxShadow . pure . bsColor (setA 0.7 grey) $ shadowWithSpread 0 0 (px 12) 0
+        -- display inline
+        sym borderRadius (px 4)
+        sym margin (em 0.5)
+        padding (px 3)(px 3)(px 0)(px 3)
+        width (px 36)
+        -- margin (em 0.5) (em 0.5)(em 0.5)(em 0.5)
+        border solid (px 1) auto
+        -- borderColor orangered
+        backgroundColor white
+        -- Clay.filters [brightness 0, saturate (pct 100)]
+        hover & do
+            boxShadow . pure . bsColor (setA 0.9 grey) $ shadowWithSpread 5 5 (px 10) 0
+    "#landing-profile-image" ? do
+        marginLeft auto
+        marginRight auto
+        
+
 
