@@ -16,6 +16,7 @@ dependencies:
   - bytestring
   - directory
   - filepath
+  - base64
 
 executable:
   main: Main.hs
