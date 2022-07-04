@@ -13,6 +13,9 @@ dependencies:
   - lucid
   - clay
   - text
+  - bytestring
+  - directory
+  - filepath
 
 executable:
   main: Main.hs

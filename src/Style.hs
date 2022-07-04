@@ -29,7 +29,6 @@ styleSheet = do
     ".flex-row" ? flexDirection row
     ".flex-col" ? flexDirection column
 
-    ".clear" ? clear both
     ".items-center" ? alignItems center
     ".justify-center" ? justifyContent center
     ".h-screen" ? height (vh 100)
@@ -42,8 +41,16 @@ styleSheet = do
 
     "#landing-wrapper" ? do
         padding (em 2) (em 2) (em 2) (em 2)
-        boxShadow . pure . bsColor (setA 0.7 grey)
-         $ shadowWithSpread 0 0 (px 12) 0
-
+        boxShadow . pure . bsColor (setA 0.7 grey) $ shadowWithSpread 0 0 (px 12) 0
+        borderRadius (px 15) (px 15) (px 15) (px 15)
     "#landing-container" ? do
         backgroundColor red
+    "#landing-socialmedia" ? do
+        flexFlow row F.wrap
+    "#landing-socialmedia-item" ? do
+        padding (px 4) (px 4) (px 4) (px 4)
+        width (px 40)
+        margin (em 0.5) (em 0)(em 0)(em 0)
+        backgroundColor grey
+        boxShadow . pure . bsColor (setA 0.7 grey) $ shadowWithSpread 0 0 (px 12) 0
+
