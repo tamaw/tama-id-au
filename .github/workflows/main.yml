@@ -24,7 +24,3 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.4
         with: 
            folder: dist
-           token: ${{ secrets.GITHUB_TOKEN }}
-           branch: main
-           repository-name: tamaw/tamaw.github.io
-
