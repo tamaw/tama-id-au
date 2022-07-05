@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ "master", "workflow" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -19,3 +19,12 @@ jobs:
       
       - name: Build
         run: make build
+        
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.3.4
+        with: 
+           folder: dist
+           token: ${{ secrets.GITHUB_TOKEN }}
+           branch: main
+           repository-name: tamaw/tamaw.github.io
+
