@@ -17,6 +17,7 @@ dependencies:
   - directory
   - filepath
   - base64
+  - uri-encode
 
 executable:
   main: Main.hs
