@@ -1,35 +1,43 @@
 module Main where
 
+import Style ( styleSheet )
+
 import Lucid
-import Style
 import qualified Clay
-import Data.Text (Text)
-import qualified Data.ByteString as BS
-import qualified Data.List as List
 import Data.Maybe (fromJust)
-import System.Directory ( listDirectory )
-import System.FilePath ( (</>), takeExtension, takeFileName )
 import Control.Monad (forM_)
-import Data.ByteString.Base64
+import Data.Char (toLower)
+import Data.Text (Text)
+import Data.Text.Lazy (toStrict)
+import qualified Data.Text as T
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Base64 as BS
+import qualified Data.List as List
+import System.Directory ( listDirectory )
+import System.FilePath ( takeExtension, takeFileName, (</>), (<.>) )
 import qualified Network.URI.Encode as Uri
-import qualified Data.Text.Lazy as T
 
 type Uri = Text
 type FileName = String
 type Base64 = Text
 type Svg = Html ()
 
--- data Svg =
-  -- SvgXml (Html ())
+data Route =
+  Index
+  | Blog
+  | About
+  deriving (Bounded, Enum, Show)
 
-imagesFilePath, svgIconsFilePath :: FilePath
+imagesFilePath, svgIconsFilePath, outputPath :: FilePath
 imagesFilePath = "resources" </> "images"
 svgIconsFilePath = "resources" </> "icons"
+outputPath = "dist"
 
 data Model = Model
   { mySocialLinks :: [(Uri, Svg)]
   , myProfilePic :: Base64
   , myFavIcon :: Svg
+  , myRoutes :: [Route]
   } deriving (Show)
 
 main :: IO ()
@@ -41,6 +49,9 @@ main = do
   imagesFiles <- listDirectory imagesFilePath
   imgs <- mapM (loadImg . (imagesFilePath </>)) imagesFiles
 
+  let routes = [minBound :: Route ..]
+  -- add not found 404.html
+
   -- setup the model
   let model = Model
         { mySocialLinks =
@@ -51,14 +62,18 @@ main = do
           ]
           , myProfilePic = lookupFile "profile.jpg" imgs
           , myFavIcon = lookupFile "favicon.svg" svgs
+          , myRoutes = routes
         }
 
   -- write out html
-  renderToFile "dist/index.html" $ masterHtml model
+  forM_ routes (\r -> renderToFile (outputPath </> routeToFileName r) $ masterHtml r model)
   where
     loadSvg = loadFile toHtmlRaw
-    loadImg f = loadFile (\b -> getDataHeader f <> "base64," <> encodeBase64 b) f
+    loadImg f = loadFile (\b -> getDataHeader f <> "base64," <> BS.encodeBase64 b) f
     lookupFile name files = fromJust $ List.lookup name files
+
+routeToFileName :: Route -> FileName
+routeToFileName r =  map toLower (show r) <.> "html"
 
 loadFile :: (BS.ByteString -> a) -> FilePath -> IO (FileName, a)
 loadFile convert filePath = do
@@ -70,29 +85,32 @@ getDataHeader f = case takeExtension f of
   ".jpg" -> "data:image/jpeg;"
   ".jpeg" -> "data:image/jpeg;"
   ".png" -> "data:image/png;"
-  ".svg" -> "data:image/svg+xml;" -- todo use for with favicon
+  ".svg" -> "data:image/svg+xml;" -- todo useor with favicon
   _ -> error $ "Unknown image format for: " <> f
 
-masterHtml :: Model -> Html ()
-masterHtml m = do
+masterHtml :: Route -> Model -> Html ()
+masterHtml r m = do
   doctype_
   html_ [lang_ "en"] $ do
     head_ $ headHtml m
     body_ $ do
-      main_ $ landingHtml m
+      main_ $ case r of
+          Index -> landingHtml m
+          Blog -> headerHtml m
+          About -> p_ "about me maybe lol"
 
 headHtml :: Model -> Html ()
 headHtml m = do
-  title_ "Blog lol"
+  title_ "Tama Waddell"
   meta_ [charset_ "UTF-8"]
   meta_ [name_ "viewport", content_ "width=device-width, initial-scale=1"]
-  meta_ [name_ "description", content_ "replace me" ]
+  -- meta_ [name_ "description", content_ "replace me" ]
   link_ [rel_ "icon", href_ ("data:image/svg+xml," <> urlEncodedFavIco (myFavIcon m))]
-  style_ [type_ "text/css"] $ Clay.render styleSheet
+  style_ [type_ "text/css"] $ T.replace "\n" "" $ toStrict (Clay.render styleSheet)
   -- workaround: no fill css element
   style_ [type_ "text/css" ] ("svg:hover { fill: var(--hover-color); }" :: Text)
   where
-    urlEncodedFavIco i = Uri.encodeText . T.toStrict $ renderText i
+    urlEncodedFavIco i = Uri.encodeText . toStrict $ renderText i
 
 landingHtml :: Model -> Html ()
 landingHtml m = do
@@ -110,4 +128,18 @@ landingHtml m = do
     renderSocialMediaLink (uri, svg) =
      div_ [class_ "flex flex-col", id_ "landing-socialmedia-item", style_ "--hover-color: orangered"] $
       a_ [href_ uri] svg
+
+headerHtml :: Model -> Html ()
+headerHtml m = do
+  p_ "testing header"
+  navHtml m
+
+navHtml :: Model -> Html ()
+navHtml m =
+  nav_ $ do
+    ul_ $ do forM_ (myRoutes m) renderNavItem
+  where
+    renderNavItem :: Route -> Html ()
+    renderNavItem r = li_ $ a_ [href_ . T.pack $ routeToFileName r] (toHtml $ show r)
+
 
