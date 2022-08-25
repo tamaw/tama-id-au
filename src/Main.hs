@@ -56,9 +56,11 @@ main = do
   let model = Model
         { mySocialLinks =
           [ ("https://github.com/tamaw", lookupFile "github.svg" svgs)
+          , ("https://dev.to/tamaw", lookupFile "devdotto.svg" svgs)
           , ("https://www.linkedin.com/in/tama-waddell-7218461b9/", lookupFile "linkedin.svg" svgs)
-          , ("https://stackoverflow.com/users/4778435/tama", lookupFile "stackoverflow.svg" svgs)
           , ("https://twitter.com/twaddell_", lookupFile "twitter.svg" svgs)
+          , ("https://exercism.org/profiles/tamaw", lookupFile "exercism.svg" svgs)
+          , ("https://stackoverflow.com/users/4778435/tama", lookupFile "stackoverflow.svg" svgs)
           ]
           , myProfilePic = lookupFile "profile.jpg" imgs
           , myFavIcon = lookupFile "favicon.svg" svgs
@@ -85,7 +87,7 @@ getDataHeader f = case takeExtension f of
   ".jpg" -> "data:image/jpeg;"
   ".jpeg" -> "data:image/jpeg;"
   ".png" -> "data:image/png;"
-  ".svg" -> "data:image/svg+xml;" -- todo useor with favicon
+  ".svg" -> "data:image/svg+xml;" -- todo user with favicon
   _ -> error $ "Unknown image format for: " <> f
 
 masterHtml :: Route -> Model -> Html ()
