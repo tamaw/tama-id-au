@@ -37,6 +37,7 @@ data Model = Model
   { mySocialLinks :: [(Uri, Svg)]
   , myProfilePic :: Base64
   , myFavIcon :: Svg
+  , myBackgroundImage :: Svg
   , myRoutes :: [Route]
   } deriving (Show)
 
@@ -64,6 +65,7 @@ main = do
           ]
           , myProfilePic = lookupFile "profile.jpg" imgs
           , myFavIcon = lookupFile "favicon.svg" svgs
+          , myBackgroundImage = lookupFile "background.svg" svgs
           , myRoutes = routes
         }
 
@@ -99,7 +101,7 @@ masterHtml r m = do
       main_ $ case r of
           Index -> landingHtml m
           Blog -> headerHtml m
-          About -> p_ "about me maybe lol"
+          About -> myBackgroundImage m
 
 headHtml :: Model -> Html ()
 headHtml m = do

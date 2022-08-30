@@ -2,4 +2,8 @@ resolver: lts-18.28
 
 packages:
 - .
+
+extra-deps:
+- lucid-svg-0.7.1
+
 apply-ghc-options: everything

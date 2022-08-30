@@ -1,0 +1,222 @@
+<svg width="1275.6" height="807.1"
+  xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+   <radialGradient id="GradientTop"
+      cx="0.3" cy="0.9" r="0.9" fx="0.09" fy="1"
+      spreadMethod="pad">
+      <stop offset="0%" stop-color="#6a7682"/>
+      <stop offset="60%" stop-color="#090A0B"/>
+   </radialGradient>
+   <radialGradient id="GradientBottom"
+      cx="0.9" cy="0.19" r=".99" fx="0.99" fy="1"
+      spreadMethod="pad">
+      <stop offset="0%" stop-color="#474f57"/>
+      <stop offset="50%" stop-color="#090A0B"/>
+   </radialGradient>
+   <!-- <radialGradient id="GradientShade"
+      cx="0.8" cy="0.49" r="0.99" fx="0.59" fy="1"
+      spreadMethod="relfect">
+      <stop offset="0%" stop-color="#474f57"/>
+      <stop offset="80%" stop-color="#090A0B"/>
+   </radialGradient> -->
+
+   <filter id="shadow">
+      <feDropShadow flood-color="white" dx="0" dy="0" stdDeviation="0.4"/>
+   </filter>
+
+
+   <!-- <filter id="DarkShadowUp">
+      <feDropShadow flood-color="black" dx="0" dy="0" stdDeviation="2.2"/>
+   </filter>
+
+   <filter id="DarkShadowDown">
+      <feDropShadow flood-color="black" dx="0" dy="0" stdDeviation="2.2"/>
+   </filter> -->
+
+  </defs>
+
+  <g>
+   <rect id="topbg" x="0" y="0" rx="0" ry="0" width="400" height="120" fill="url(#GradientTop)"></rect>
+   <rect id="bottombg" x="0" y="120" rx="0" ry="0" width="400" height="95" fill="url(#GradientBottom)"></rect>
+
+   <circle cx="60" cy="280" r="40" fill="gray" filter="url(#shadow)"/>
+  </g>
+
+  <g>
+    <!-- Middle Line -->
+    <path stroke="black" stroke-width="0.3"
+          d="M 0 120 h400" />
+
+    <!-- Top 9th (right most) -->
+    <path stroke="black" stroke-width="0.3" fill="#FE5D26"
+          d="M 80 0 v120
+             l -10 0
+             l 0 -120
+             z
+             " />
+
+    <!-- Bottom 9th -->
+    <path fill="#FE5D26"
+          d="M 80 120
+             l 265 95
+             l -120 0
+             l -155 -95
+             z " />
+
+    <!-- <path stroke="black" stroke-width="0.3" fill="#FE5D26"
+          d="M 80 120
+             l 265 95
+             l -120 0
+             l -155 -95
+             z " /> -->
+
+    <!-- top 8th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 68 0 v120
+             l -6 0
+             l 0 -120
+             z " />
+
+    <!-- Bottom 8th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 68 120
+             l 130 95
+             l -65 0
+             l -71 -95
+             z " />
+
+    <!-- Top 7th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 60 0 v120
+            l -8 0
+            l 0 -120
+            z " />
+
+    <!-- Bottom 7th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 60 120
+             l 45 95
+             l -110 0
+             l 57 -95
+             z
+             " />
+
+   <!-- Top 6th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 50 0 v120
+            l -4 0
+            l 0 -120
+            z " />
+
+    <!-- Bottom 6th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 50 120
+             l -65 95
+             l -30 0
+             l 91 -95
+             z
+             " />
+
+   <!-- Top 5th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 44 0 v120
+            l -8 0
+            l 0 -120
+            z " />
+
+   <!-- Bottom 5th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 44 120
+             l -105 95
+             l -50 0
+             l 147 -95
+             " />
+
+   <!-- Top 4th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 34 0 v120
+            l -4 0
+            l 0 -120
+            z " />
+
+   <!-- Bottom 4th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 34 120
+             l -87 50
+             l -25 0
+             l 108 -50
+             " />
+
+   <!-- Top 3th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 28 0 v120
+            l -4 0
+            l 0 -120
+            z " />
+
+   <!-- Bottom 3th -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 28 120
+             l -120 50
+             l -25 0
+             l 141 -50
+             " />
+
+    <!--  two -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 22 0 v120
+            l -7 0
+            l 0 -120
+            z " />
+
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 22 120
+             l -157 50
+             l -25 0
+             l 175 -50
+             " />
+
+   <!-- one -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 12 0 v120
+            l -2 0
+            l 0 -120
+            z " />
+
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 12 120
+             l -197 50
+             l -25 0
+             l 220 -50
+             " />
+
+    <!-- zero -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 08 0 v120
+            l -2 0
+            l 0 -120
+            z " />
+
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 08 120
+             l -240 50
+             l -25 0
+             l 263 -50
+             " />
+
+    <!--  start -->
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+         d="M 04 0 v120
+            l -4 0
+            l 0 -120
+            z " />
+
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+          d="M 04 120
+             l -277 50
+             l -25 0
+             l 298 -50
+             " />
+
+  </g>
+</svg>
