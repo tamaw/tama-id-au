@@ -2,37 +2,37 @@
   xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
   <defs>
    <radialGradient id="GradientTop"
-      cx="0.3" cy="0.9" r="0.9" fx="0.09" fy="1"
+      cx="0.4" cy="0.9" r="0.9" fx="0.09" fy="1"
       spreadMethod="pad">
       <stop offset="0%" stop-color="#6a7682"/>
       <stop offset="60%" stop-color="#090A0B"/>
    </radialGradient>
    <radialGradient id="GradientBottom"
-      cx="0.9" cy="0.19" r=".99" fx="0.99" fy="1"
+      cx="0.9" cy="0.19" r=".99" fx="0.69" fy="1"
       spreadMethod="pad">
       <stop offset="0%" stop-color="#474f57"/>
-      <stop offset="50%" stop-color="#090A0B"/>
+      <stop offset="60%" stop-color="#090A0B"/>
    </radialGradient>
-   <!-- <radialGradient id="GradientShade"
-      cx="0.8" cy="0.49" r="0.99" fx="0.59" fy="1"
-      spreadMethod="relfect">
-      <stop offset="0%" stop-color="#474f57"/>
-      <stop offset="80%" stop-color="#090A0B"/>
-   </radialGradient> -->
+
+   <filter id="point">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.3"></feGaussianBlur>
+      <!-- <feDiffuseLighting result="backlight" lighting-color="white" surfaceScale="1" diffuseConstant="1" kernelUnitLength="1">
+         <fePointLight x="65" y="120" z="125" />
+      </feDiffuseLighting> -->
+      <feDiffuseLighting result="backlight" lighting-color="white" surfaceScale="1" diffuseConstant="1" kernelUnitLength="1">
+         <fePointLight x="65" y="100" z="155" />
+      </feDiffuseLighting>
+
+      <feComposite in="SourceGraphic" in2="backlight" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" />
+   </filter>
 
    <filter id="shadow">
-      <feDropShadow flood-color="white" dx="0" dy="0" stdDeviation="0.4"/>
+      <feDropShadow in="SourceGraphic" flood-color="black" dx="-2" dy="-1" flood-opacity="3" />
    </filter>
 
-   <!-- shadow the middle line -->
-
-   <!-- <filter id="DarkShadowUp">
-      <feDropShadow flood-color="black" dx="0" dy="0" stdDeviation="2.2"/>
+   <filter id="backglow">
+      <feDropShadow in="SourceGraphic" flood-color="white" dx="-1" dy="-1" flood-opacity="0.1" />
    </filter>
-
-   <filter id="DarkShadowDown">
-      <feDropShadow flood-color="black" dx="0" dy="0" stdDeviation="2.2"/>
-   </filter> -->
 
   </defs>
 
@@ -40,16 +40,20 @@
    <rect id="topbg" x="0" y="0" rx="0" ry="0" width="400" height="120" fill="url(#GradientTop)"></rect>
    <rect id="bottombg" x="0" y="120" rx="0" ry="0" width="400" height="95" fill="url(#GradientBottom)"></rect>
 
-   <circle cx="60" cy="280" r="40" fill="gray" filter="url(#shadow)"/>
+   <circle cx="00" cy="260" r="40" fill="white" filter="url(#shadow)"/>
+   <circle cx="80" cy="260" r="40" fill="white" filter="url(#shadow)"/>
+   <circle cx="160" cy="260" r="40" fill="white" filter="url(#point)"/>
+   <circle cx="240" cy="260" r="40" fill="white" filter="url(#point)"/>
+   <circle cx="320" cy="260" r="40" fill="white" filter="url(#point)"/>
   </g>
 
   <g>
-    <!-- Middle Line -->
+    <!-- Middle Line TODO lighten up the end -->
     <path stroke="black" stroke-width="0.3"
           d="M 0 120 h400" />
 
     <!-- Top 9th (right most) -->
-    <path stroke="black" stroke-width="0.3" fill="#FE5D26"
+    <path stroke="black" stroke-width="0.3" fill="#FE5D26" filter="url(#backglow)"
           d="M 80 0 v120.13
              l -10 0
              l 0 -120
@@ -57,29 +61,22 @@
              " />
 
     <!-- Bottom 9th -->
-    <path fill="#FE5D26"
+    <path fill="#FE5D26" filter="url(#point)"
           d="M 80 120
              l 265 95
              l -120 0
              l -155 -95
              z " />
 
-    <!-- <path stroke="black" stroke-width="0.3" fill="#FE5D26"
-          d="M 80 120
-             l 265 95
-             l -120 0
-             l -155 -95
-             z " /> -->
-
     <!-- top 8th -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
           d="M 68 0 v120.13
              l -6 0
              l 0 -120
              z " />
 
     <!-- Bottom 8th -->
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 68 120
              l 130 95
              l -65 0
@@ -87,14 +84,14 @@
              z " />
 
     <!-- Top 7th -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
          d="M 60 0 v120.13
             l -8 0
             l 0 -120
             z " />
 
     <!-- Bottom 7th -->
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 60 120
              l 45 95
              l -110 0
@@ -103,14 +100,14 @@
              " />
 
    <!-- Top 6th -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
          d="M 50 0 v120.13
             l -4 0
             l 0 -120
             z " />
 
     <!-- Bottom 6th -->
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 50 120
              l -65 95
              l -30 0
@@ -119,14 +116,14 @@
              " />
 
    <!-- Top 5th -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
          d="M 44 0 v120.13
             l -8 0
             l 0 -120
             z " />
 
    <!-- Bottom 5th -->
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 44 120
              l -105 95
              l -50 0
@@ -134,14 +131,14 @@
              " />
 
    <!-- Top 4th -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
          d="M 34 0 v120.13
             l -4 0
             l 0 -120
             z " />
 
    <!-- Bottom 4th -->
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 34 120
              l -87 50
              l -25 0
@@ -149,14 +146,14 @@
              " />
 
    <!-- Top 3th -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
          d="M 28 0 v120.13
             l -4 0
             l 0 -120
             z " />
 
    <!-- Bottom 3th -->
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 28 120
              l -120 50
              l -25 0
@@ -164,13 +161,13 @@
              " />
 
     <!--  two -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
          d="M 22 0 v120.13
             l -7 0
             l 0 -120
             z " />
 
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 22 120
              l -157 50
              l -25 0
@@ -178,13 +175,13 @@
              " />
 
    <!-- one -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
          d="M 12 0 v120.13
             l -2 0
             l 0 -120
             z " />
 
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 12 120
              l -197 50
              l -25 0
@@ -192,13 +189,13 @@
              " />
 
     <!-- zero -->
-    <path stroke="black" stroke-width="0.3" fill="#FDF7FA"
+    <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
          d="M 08 0 v120.13
             l -2 0
             l 0 -120
             z " />
 
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#point)"
           d="M 08 120
              l -240 50
              l -25 0
@@ -206,7 +203,7 @@
              " />
 
     <!--  start -->
-    <path fill="#FDF7FA"
+    <path fill="#FDF7FA" filter="url(#backglow)"
          d="M 04 0 v120.13
             l -4 0
             l 0 -120
