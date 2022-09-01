@@ -1,5 +1,7 @@
-<svg width="5000px" height="auto" viewBox="0 1 800 500"
-  xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+<svg width="3000px" height="auto" viewBox="0 1 800 215"
+  xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+  id="background"
+  >
   <defs>
    <radialGradient id="GradientTop"
          cx="0.0" cy="0.9" r="1.4" fx="-0.19" fy="1"
@@ -36,12 +38,12 @@
 
   </defs>
 
-  <g>
+  <g >
 
    <rect id="topbg" x="0" y="0" rx="0" ry="0" width="400" height="120" fill="url(#GradientTop)"></rect>
    <rect id="bottombg" x="0" y="120" rx="0" ry="0" width="400" height="95" fill="url(#GradientBottom)"></rect>
 
-    <!-- Middle Line TODO lighten up the end -->
+
     <path stroke="black" stroke-width="0.3"
           d="M 0 120 h400" />
 
@@ -55,26 +57,88 @@
 
     <!-- Bottom 9th -->
     <path fill="#FDF7FA" filter="url(#point) url(#bottomglow)"
-          d="M 80 120
-             l 265 95
-             l -120 0
-             l -155 -95
-             z " />
+         d="M 80 120
+            l 265 95
+            l -120 0
+            l -155 -95
+            z" >
+
+         <animate
+            attributeName="d"
+            to="M 80 120
+               l 240 95
+               l -120 0
+               l -130 -95
+               z "
+            dur="0.2s"
+            fill="freeze"
+            accumulate="sum"
+            restart="whenNotActive"
+            begin="overlay.mouseover"
+         />
+
+         <animate
+            attributeName="d"
+            to="
+            M 80 120
+            l 265 95
+            l -120 0
+            l -155 -95
+            z"
+            dur="0.2s"
+            fill="freeze"
+            restart="whenNotActive"
+            begin="overlay.mouseout"
+         />
+
+   </path>
 
     <!-- top 8th -->
     <path stroke="black" stroke-width="0.3" fill="#FE5D26" filter="url(#backglow)"
           d="M 68 0 v120.13
              l -6 0
              l 0 -120
-             z " />
+             z ">
+   </path>
 
     <!-- Bottom 8th -->
     <path fill="#FE5D26" filter="url(#bottomglow)"
-          d="M 68 120
+          d="
+            M 68 120
              l 130 95
              l -65 0
              l -71 -95
-             z " />
+             z "
+      >
+      <animate
+            attributeName="d"
+            to="
+             M 68 120
+             l 110 95
+             l -65 0
+             l -51 -95
+             z "
+            dur="0.2s"
+            fill="freeze"
+            accumulate="sum"
+            restart="whenNotActive"
+            begin="overlay.mouseover"
+      />
+
+      <animate
+            attributeName="d"
+            to="
+             M 68 120
+             l 130 95
+             l -65 0
+             l -71 -95
+             z "
+            dur="0.2s"
+            fill="freeze"
+            restart="whenNotActive"
+            begin="overlay.mouseout"
+         />
+</path>
 
     <!-- Top 7th -->
     <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)"
@@ -208,6 +272,10 @@
              l -25 0
              l 298 -50
              " />
+
+   <!-- mouse overlay for anamiations-->
+   <!-- <rect fill-opacity="0" id="overlay1" x="0" y="0" rx="0" ry="0" width="400" height="120"></rect> -->
+   <rect fill-opacity="0" id="overlay" x="0" y="120" rx="0" ry="0" width="400" height="95"></rect>
 
   </g>
 </svg>
