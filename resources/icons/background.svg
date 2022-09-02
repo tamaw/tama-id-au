@@ -1,15 +1,52 @@
 <svg width="3000px" height="auto" viewBox="0 1 800 215" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" id="background">
+   <style>
+      .light path {
+         fill: #090A0B;
+      }
+      .light .stripe-up {
+         stroke: white;
+         stroke-width: 0.2
+      }
+      .light #featureline {
+         fill: #FE5D26;
+      }
+      .light #gradient-top stop:nth-child(1) {
+         stop-color: #090A0B;
+      }
+      .light #gradient-top stop:nth-child(2) {
+         stop-color: #fdf7fa;
+      }
+      .light #gradient-bottom stop:nth-child(1) {
+         stop-color: #090A0B;
+      }
+      .light #gradient-bottom stop:nth-child(2) {
+         stop-color: #fdf7fa;
+      }
+      .light #middle-line {
+         stroke: white;
+      }
+      .light #bottom-glow feDropShadow {
+         flood-color: black;
+      }
+      .light #bottom-glow-small feDropShadow {
+         flood-color: black;
+      }
+      .light #back-glow feDropShadow {
+         flood-color: black;
+      }
+
+   </style>
    <defs>
-      <radialGradient id="GradientTop" cx="0.0" cy="0.9" r="1.4" fx="-0.19" fy="1" spreadMethod="pad">
+      <radialGradient id="gradient-top" cx="0.0" cy="0.9" r="1.4" fx="-0.19" fy="1" spreadMethod="pad">
          <stop offset="0%" stop-color="#6a7682" />
          <stop offset="60%" stop-color="#090A0B" />
       </radialGradient>
-      <radialGradient id="GradientBottom" cx="0.0" cy="0.6" r="1.3" fx="-0.19" fy="1" spreadMethod="pad">
+      <radialGradient id="gradient-bottom" cx="0.0" cy="0.6" r="1.3" fx="-0.19" fy="1" spreadMethod="pad">
          <stop offset="0%" stop-color="#474f57" />
          <stop offset="65%" stop-color="#090A0B" />
       </radialGradient>
 
-      <filter id="point">
+      <filter id="point-light">
          <feGaussianBlur in="SourceGraphic" stdDeviation="10"></feGaussianBlur>
          <feDiffuseLighting result="backlight" lighting-color="white" surfaceScale="1" diffuseConstant="1" kernelUnitLength="1">
             <fePointLight x="65" y="100" z="145" />
@@ -17,28 +54,26 @@
          <feComposite in="SourceGraphic" in2="backlight" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" />
       </filter>
 
-      <filter id="bottomglow">
+      <filter id="bottom-glow">
          <feDropShadow in="SourceGraphic" flood-color="white" dx="1" dy="2" flood-opacity=".4" />
-
       </filter>
-      <filter id="bottomglowsmall">
+      <filter id="bottom-glow-small">
          <feDropShadow in="SourceGraphic" flood-color="white" dx="1" dy="1" flood-opacity=".2" />
       </filter>
-
-      <filter id="backglow">
+      <filter id="back-glow">
          <feDropShadow in="SourceGraphic" flood-color="white" dx="-1" dy="-1" flood-opacity="0.1" />
       </filter>
 
    </defs>
 
    <g>
-      <rect id="topbg" x="0" y="0" rx="0" ry="0" width="400" height="120" fill="url(#GradientTop)"></rect>
-      <rect id="bottombg" x="0" y="120" rx="0" ry="0" width="400" height="95" fill="url(#GradientBottom)"></rect>
+      <rect id="top-bg" x="0" y="0" rx="0" ry="0" width="400" height="120" fill="url(#gradient-top)"></rect>
+      <rect id="bottom-bg" x="0" y="120" rx="0" ry="0" width="400" height="95" fill="url(#gradient-bottom)"></rect>
 
-      <path stroke="black" stroke-width="0.3" d="M 0 120 h400" />
+      <path id="middle-line" stroke="black" stroke-width="0.2" d="M 0 120 h400" />
 
       <!-- eleven -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up" stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 80 0
             v 120.13
             h -10 0
@@ -46,7 +81,7 @@
             z
             " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglow)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow)" d="
             M 80 120
             l 245 95
             l -120 0
@@ -67,14 +102,14 @@
       </path>
 
       <!-- ten -->
-      <path stroke="black" stroke-width="0.3" fill="#FE5D26" filter="url(#backglow)" d="
+      <path class="stripe-up" id="featureline" stroke="black" stroke-width="0.2" fill="#FE5D26" filter="url(#back-glow)" d="
              M 68 0
              v 120.13
              l -6 0
              l 0 -120
              z "></path>
 
-      <path fill="#FE5D26" filter="url(#bottomglow)" d="
+      <path id="featureline" fill="#FE5D26" filter="url(#bottom-glow)" d="
             M 68 120
             l 119 95
             l -65 0
@@ -96,14 +131,14 @@
       </path>
 
       <!-- nine -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up"  stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 60 0
             v120.13
             l -8 0
             l 0 -120
             z " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglow)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow)" d="
              M 60 120
              l 45 95
              l -110 0
@@ -124,14 +159,14 @@
       </path>
 
       <!-- eight -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up" stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 50 0
             v120.13
             l -4 0
             l 0 -120
             z " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglowsmall)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow-small)" d="
             M 50 120
             l -65 95
             l -30 0
@@ -154,14 +189,14 @@
 
 
       <!-- seven -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up" stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 44 0
             v 120.13
             l -8 0
             l 0 -120
             z " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglowsmall)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow-small)" d="
             M 44 120
             l -105 95
             l -50 0
@@ -182,14 +217,14 @@
       </path>
 
       <!-- six -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up" stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 34 0
              v120.13
             l -4 0
             l 0 -120
             z " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglowsmall)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow-small)" d="
              M 34 120
              l -87 50
              l -25 0
@@ -210,14 +245,14 @@
       </path>
 
       <!-- five -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up"  stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 28 0
             v 120.13
             l -4 0
             l 0 -120
             z " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglowsmall)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow-small)" d="
             M 28 120
             l -120 50
             l -25 0
@@ -239,14 +274,14 @@
       </path>
 
       <!--  four -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up" stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 22 0
             v120.13
             l -7 0
             l 0 -120
             z " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglowsmall)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow-small)" d="
             M 22 120
             l -157 50
             l -25 0
@@ -268,14 +303,14 @@
       </path>
 
       <!-- three -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up" stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 12 0
             v120.13
             l -2 0
             l 0 -120
             z " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglowsmall)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow-small)" d="
             M 12 120
             l -197 50
             l -25 0
@@ -283,14 +318,14 @@
             " />
 
       <!-- two -->
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up" stroke="black" stroke-width="0.2" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 08 0
             v 120.13
             l -2 0
             l 0 -120
             z " />
 
-      <path fill="#FDF7FA" filter="url(#point) url(#bottomglowsmall)" d="
+      <path fill="#FDF7FA" filter="url(#point-light) url(#bottom-glow-small)" d="
             M 08 120
             l -240 50
             l -25 0
@@ -298,14 +333,14 @@
             " />
 
       <!--  one -->
-      <path fill="#FDF7FA" filter="url(#backglow)" d="
+      <path class="stripe-up" fill="#FDF7FA" filter="url(#back-glow)" d="
             M 04 0
             v 120.13
             l -4 0
             l 0 -120
             z " />
 
-      <path stroke="black" stroke-width="0.3" fill="#FDF7FA" d="
+      <path stroke="black" stroke-width="0.2" fill="#FDF7FA" d="
             M 04 120
             l -277 50
             l -25 0
