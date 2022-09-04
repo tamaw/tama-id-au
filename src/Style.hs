@@ -1,5 +1,7 @@
 module Style where
 
+import Types ( Model, Base64 )
+
 import Data.Text (Text)
 import Clay
 import qualified Clay.Flexbox as F
@@ -8,6 +10,14 @@ fontHeading, fontPrimary, fontSecondary :: Text
 fontHeading = "Verdana"
 fontPrimary = "Tahoma"
 fontSecondary = "Segoe"
+
+styleSheetFonts :: Base64 -> Css
+styleSheetFonts d =
+    fontFace $ do
+        fontFamily ["Exo2"] []
+        fontFaceSrc [FontFaceSrcUrl d (Just WOFF2)]
+
+        -- url (myLogoFont m)
 
 styleSheet :: Css
 styleSheet = do
@@ -72,3 +82,8 @@ styleSheet = do
         sym borderRadius (pct 15)
 
         boxShadow . pure . bsColor (setA 0.9 grey) $ shadowWithSpread 1 1 (px 2) 1
+    -- "#background path" ? do
+    ".logo-front" ? do
+        color blue
+
+

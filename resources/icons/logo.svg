@@ -1,0 +1,19 @@
+<svg height="auto" xmlns="http://www.w3.org/2000/svg" class="logo">
+  <style>
+    .dark .logo {
+      fill: #FDF7FA;
+    }
+    .logo {
+      font-family: Exo2;
+      font-size: 33px;
+      font-weight: bold;
+      fill: #090A0B;
+    }
+    .middle-logo {
+      fill: #FE5D26;
+    }
+  </style>
+  <text class="front-logo" y='25' x=''>tama</text>
+  <text class="middle-logo" y='25' x='82'>:</text>
+  <text class="end-logo" y='25' x="90">w</text>
+</svg>

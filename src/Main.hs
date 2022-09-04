@@ -1,6 +1,7 @@
 module Main where
 
-import Style ( styleSheet )
+import Types
+import Style ( styleSheet, styleSheetFonts )
 
 import Lucid
 import qualified Clay
@@ -17,29 +18,11 @@ import System.Directory ( listDirectory )
 import System.FilePath ( takeExtension, takeFileName, (</>), (<.>) )
 import qualified Network.URI.Encode as Uri
 
-type Uri = Text
-type FileName = String
-type Base64 = Text
-type Svg = Html ()
-
-data Route =
-  Index
-  | Blog
-  | About
-  deriving (Bounded, Enum, Show)
-
-imagesFilePath, svgIconsFilePath, outputPath :: FilePath
+imagesFilePath, svgIconsFilePath, fontFilePath, outputPath :: FilePath
 imagesFilePath = "resources" </> "images"
 svgIconsFilePath = "resources" </> "icons"
+fontFilePath = "resources" </> "fonts"
 outputPath = "dist"
-
-data Model = Model
-  { mySocialLinks :: [(Uri, Svg)]
-  , myProfilePic :: Base64
-  , myFavIcon :: Svg
-  , myBackgroundImage :: Svg
-  , myRoutes :: [Route]
-  } deriving (Show)
 
 main :: IO ()
 main = do
@@ -50,8 +33,11 @@ main = do
   imagesFiles <- listDirectory imagesFilePath
   imgs <- mapM (loadImg . (imagesFilePath </>)) imagesFiles
 
+  fontFiles <- listDirectory fontFilePath
+  fonts <- mapM (loadFont . (fontFilePath </>)) fontFiles
+
   let routes = [minBound :: Route ..]
-  -- add not found 404.html
+  -- TODO add not found 404.html
 
   -- setup the model
   let model = Model
@@ -65,8 +51,10 @@ main = do
           ]
           , myProfilePic = lookupFile "profile.jpg" imgs
           , myFavIcon = lookupFile "favicon.svg" svgs
+          , myLogo = lookupFile "logo.svg" svgs
           , myBackgroundImage = lookupFile "background.svg" svgs
           , myRoutes = routes
+          , myLogoFont = lookupFile "exo2-bold-webfont.woff2" fonts
         }
 
   -- write out html
@@ -74,6 +62,7 @@ main = do
   where
     loadSvg = loadFile toHtmlRaw
     loadImg f = loadFile (\b -> getDataHeader f <> "base64," <> BS.encodeBase64 b) f
+    loadFont = loadImg
     lookupFile name files = fromJust $ List.lookup name files
 
 routeToFileName :: Route -> FileName
@@ -89,6 +78,7 @@ getDataHeader f = case takeExtension f of
   ".jpg" -> "data:image/jpeg;"
   ".jpeg" -> "data:image/jpeg;"
   ".png" -> "data:image/png;"
+  ".woff2" -> "data:file/octet-stream;"
   ".svg" -> "data:image/svg+xml;" -- todo user with favicon
   _ -> error $ "Unknown image format for: " <> f
 
@@ -100,8 +90,11 @@ masterHtml r m = do
     body_ $ do
       main_ $ case r of
           Index -> landingHtml m
-          Blog -> headerHtml m
-          About -> myBackgroundImage m
+          Blog -> return ()
+          About -> do
+            div_ [class_ "dark"] $ myLogo m
+            div_ [] $ myLogo m
+            div_ [class_ "dark"] $ myBackgroundImage m
 
 headHtml :: Model -> Html ()
 headHtml m = do
@@ -111,6 +104,7 @@ headHtml m = do
   -- meta_ [name_ "description", content_ "replace me" ]
   link_ [rel_ "icon", href_ ("data:image/svg+xml," <> urlEncodedFavIco (myFavIcon m))]
   style_ [type_ "text/css"] $ T.replace "\n" "" $ toStrict (Clay.render styleSheet)
+  style_ [type_ "text/css"] $ T.replace "\n" "" $ toStrict (Clay.render $ styleSheetFonts $ myLogoFont m)
   -- workaround: no fill css element
   style_ [type_ "text/css" ] ("svg:hover { fill: var(--hover-color); }" :: Text)
   where
