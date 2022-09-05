@@ -93,12 +93,12 @@ masterHtml r m = do
           Blog -> return ()
           About -> return ()
           Dark -> do
-            div_ [style_ "height:30px"] $ myLogo m
+            div_ [style_ "background-color: #090A0B" ] $ do
+              div_ [style_ "height:30px"] $ myLogo m
             div_ [] $ myBackgroundImage m
           Light -> do
-            div_ [style_ "background-color: black" ] $ do
-              div_ [class_ "light", style_ "height:30px"] $ myLogo m
-              div_ [class_ "light"] $ myBackgroundImage m
+            div_ [class_ "light", style_ "height:40px"] $ myLogo m
+            div_ [class_ "light"] $ myBackgroundImage m
 
 headHtml :: Model -> Html ()
 headHtml m = do

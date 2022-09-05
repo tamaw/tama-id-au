@@ -1,16 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="logo">
   <style>
     .light .logo {
-      fill: #FDF7FA;
+      fill: #090A0B ;
     }
     .light #text-glow feDropShadow {
-      flood-color: white;
+      flood-color: black;
     }
     .logo {
       font-family: Exo2;
       font-size: 32px;
       font-weight: bold;
-      fill: #090A0B;
+      fill: #FDF7FA;
+    }
+    /* override for now */
+    svg:hover {
+      fill: #FDF7FA;
     }
     .colon-logo {
       fill: #FE5D26;
@@ -18,13 +22,13 @@
   </style>
   <defs>
    <filter id="text-glow">
-    <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation=".4"></feGaussianBlur>
-    <feDropShadow in="blur" result="shadow" flood-color="black" dx="0" dy="1" flood-opacity=".4" />
+    <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation=".3"></feGaussianBlur>
+    <feDropShadow in="blur" result="shadow" flood-color="white" dx="0" dy="1" flood-opacity=".4" />
     <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
    </filter>
   </defs>
 
   <text filter="url(#text-glow)" y='25' x='0'>tama</text>
-  <text class="colon-logo" y='25' x='80'>:</text>
+  <text class="colon-logo" y='24' x='80'>:</text>
   <text filter="url(#text-glow)" y='25' x="90">w</text>
 </svg>
