@@ -11,6 +11,8 @@ data Route =
   Index
   | Blog
   | About
+  | Light
+  | Dark
   deriving (Bounded, Enum, Show)
 
 data Model = Model

@@ -1,19 +1,30 @@
-<svg height="auto" xmlns="http://www.w3.org/2000/svg" class="logo">
+<svg xmlns="http://www.w3.org/2000/svg" class="logo">
   <style>
-    .dark .logo {
+    .light .logo {
       fill: #FDF7FA;
+    }
+    .light #text-glow feDropShadow {
+      flood-color: white;
     }
     .logo {
       font-family: Exo2;
-      font-size: 33px;
+      font-size: 32px;
       font-weight: bold;
       fill: #090A0B;
     }
-    .middle-logo {
+    .colon-logo {
       fill: #FE5D26;
     }
   </style>
-  <text class="front-logo" y='25' x=''>tama</text>
-  <text class="middle-logo" y='25' x='82'>:</text>
-  <text class="end-logo" y='25' x="90">w</text>
+  <defs>
+   <filter id="text-glow">
+    <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation=".4"></feGaussianBlur>
+    <feDropShadow in="blur" result="shadow" flood-color="black" dx="0" dy="1" flood-opacity=".4" />
+    <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
+   </filter>
+  </defs>
+
+  <text filter="url(#text-glow)" y='25' x='0'>tama</text>
+  <text class="colon-logo" y='25' x='80'>:</text>
+  <text filter="url(#text-glow)" y='25' x="90">w</text>
 </svg>

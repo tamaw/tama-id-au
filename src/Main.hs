@@ -91,10 +91,14 @@ masterHtml r m = do
       main_ $ case r of
           Index -> landingHtml m
           Blog -> return ()
-          About -> do
-            div_ [class_ "dark"] $ myLogo m
-            div_ [] $ myLogo m
-            div_ [class_ "dark"] $ myBackgroundImage m
+          About -> return ()
+          Dark -> do
+            div_ [style_ "height:30px"] $ myLogo m
+            div_ [] $ myBackgroundImage m
+          Light -> do
+            div_ [style_ "background-color: black" ] $ do
+              div_ [class_ "light", style_ "height:30px"] $ myLogo m
+              div_ [class_ "light"] $ myBackgroundImage m
 
 headHtml :: Model -> Html ()
 headHtml m = do
