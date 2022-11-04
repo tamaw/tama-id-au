@@ -44,10 +44,8 @@ main = do
         { mySocialLinks =
           [ ("https://github.com/tamaw", lookupFile "github.svg" svgs)
           , ("https://dev.to/tamaw", lookupFile "devdotto.svg" svgs)
-          , ("https://www.linkedin.com/in/tama-waddell-7218461b9/", lookupFile "linkedin.svg" svgs)
-          , ("https://twitter.com/twaddell_", lookupFile "twitter.svg" svgs)
-          , ("https://exercism.org/profiles/tamaw", lookupFile "exercism.svg" svgs)
-          , ("https://stackoverflow.com/users/4778435/tama", lookupFile "stackoverflow.svg" svgs)
+          , ("https://www.linkedin.com/in/tama-waddell", lookupFile "linkedin.svg" svgs)
+          , ("https://twitter.com/tamawdev", lookupFile "twitter.svg" svgs)
           ]
           , myProfilePic = lookupFile "profile.jpg" imgs
           , myFavIcon = lookupFile "favicon.svg" svgs
